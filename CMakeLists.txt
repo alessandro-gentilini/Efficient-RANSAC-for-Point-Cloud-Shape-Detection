@@ -1,17 +1,13 @@
 # Taken from https://github.com/ihmcrobotics/ihmc-open-robotics-software/blob/5f5345ea78f681c1ca815bb1539041b5d0ab54d0/ihmc-sensor-processing/csrc/ransac_schnabel/CMakeLists.txt
 cmake_minimum_required(VERSION 2.8)
 project(pc_ransac)
-if(APPLE)
-	 include(CMakeForceCompiler)
-	 CMAKE_FORCE_C_COMPILER(gcc GNU)
-	 CMAKE_FORCE_CXX_COMPILER(g++ GNU)
-endif(APPLE)
 
-include_directories(src/)
-include_directories(src/MiscLib/)
-include_directories(/usr/include/malloc)
-FILE(GLOB SRC "src/*.cpp")
-FILE(GLOB MISC_SRC "src/MiscLib/*.cpp")
+set(CMAKE_CXX_FLAGS "-fpermissive")
+
+include_directories(./)
+include_directories(./MiscLib/)
+FILE(GLOB SRC "./*.cpp")
+FILE(GLOB MISC_SRC "./MiscLib/*.cpp")
 
 add_library(libransac STATIC  ${SRC} ${MISC_SRC})
 add_executable(main main.cpp)
