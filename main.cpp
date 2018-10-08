@@ -63,6 +63,8 @@ int main()
 	std::cout << "remaining unassigned points " << remaining << std::endl;
 	for(int i=0;i<shapes.size();i++)
 	{
-		std::cout << "shape " << i << " consists of " << shapes[i].second << " points" << std::endl;
+		std::string desc;
+		shapes[i].first->Description(&desc);
+		std::cout << "shape " << i << " consists of " << shapes[i].second << " points, it is a " << desc << std::endl;
 	}
 }
