@@ -17,9 +17,17 @@ int main()
 	PointCloud pc;
 
 	// fill or load point cloud from file
-	for(int i=0;i<100;i++)
-		for(int j=0;j<100;j++)
+	for(int i=0;i<100;i++){
+		for(int j=0;j<100;j++){
 			pc.push_back(Point(Vec3f(i,j,0)));
+			if(fabs((i-50)*(i-50)+(j-50)*(j-50)-50)<5){
+				//std::cout << i << "," << j << "\n";
+				pc.push_back(Point(Vec3f(i,j,1)));
+				pc.push_back(Point(Vec3f(i,j,2)));
+				pc.push_back(Point(Vec3f(i,j,3)));
+			}
+		}
+	}
 	
 	// set the bbox in pc
 	pc.setBBox(Vec3f(-100,-100,-100), Vec3f(100,100,100));
@@ -42,6 +50,7 @@ int main()
 
 	// set which primitives are to be detected by adding the respective constructors
 	detector.Add(new PlanePrimitiveShapeConstructor());
+	detector.Add(new CylinderPrimitiveShapeConstructor());
 	
 	/*
 	detector.Add(new SpherePrimitiveShapeConstructor());
